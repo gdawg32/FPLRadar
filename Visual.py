@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 from soccerplots.radar_chart import Radar
+from unidecode import unidecode
 
 def get_player_json(id):
     url = "https://fantasy.premierleague.com/api/bootstrap-static/"
@@ -49,6 +50,7 @@ def visualise(p1, p2):
     dfs = [get_player_data(player_id) for player_id in player_ids]
     df = pd.concat(dfs, ignore_index=True)
     df.columns = new_column_names
+    df['Name'] = df['Name'].apply(unidecode)
     #get parameters
     params = list(df.columns)
     params = params[1:]

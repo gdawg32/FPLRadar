@@ -99,7 +99,7 @@ def visualise(p1, p2):
         subtitle_fontsize=15
     )
 
-    endnote = 'Oakley rules'
+    endnote = 'Elon banished me :-('
 
     #instantiate radar chart class
     radar = Radar()

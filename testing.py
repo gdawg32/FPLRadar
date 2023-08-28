@@ -3,7 +3,7 @@ import mapping as mp
 
 #Input
 a = 'Salah'
-b = 'Estupinan'
+b = 'Haaland'
 
 #Get FPL IDs
 p1 = mp.get_fpl_id(a)

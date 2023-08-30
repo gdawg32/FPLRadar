@@ -2,8 +2,8 @@ import Visual as vs
 import mapping as mp
 
 #Input
-a = 'Salah'
-b = 'Haaland'
+a = 'Fernandes'
+b = 'Estupinan'
 
 #Get FPL IDs
 p1 = mp.get_fpl_id(a)

@@ -19,11 +19,12 @@ def get_player_json(id):
     else:
         print("Failed to retrieve data from the API.")
 
-new_column_names = ['Name', 'Goals', 'Assists', 'Points', 'Minutes', 'xG', 'xA', 'Bonus', 'BPS', 'Threat', 'Starts']
+new_column_names = ['id','Name', 'Goals', 'Assists', 'Points', 'Minutes', 'xG', 'xA', 'Bonus', 'BPS', 'Threat', 'Starts']
 
 def get_player_data(player_id):
     data = get_player_json(player_id)  # Replace with your actual function call
     new_column_names = [
+        'id',
         'web_name',
         'goals_scored',
         'assists',
@@ -51,9 +52,10 @@ def visualise(p1, p2):
     df = pd.concat(dfs, ignore_index=True)
     df.columns = new_column_names
     df['Name'] = df['Name'].apply(unidecode)
+
     #get parameters
     params = list(df.columns)
-    params = params[1:]
+    params = params[2:]
     #add ranges to list of tuple pairs
     ranges = []
     a_values = []
@@ -69,13 +71,13 @@ def visualise(p1, p2):
         ranges.append((a,b))
         
     for x in range(len(df['Name'])):
-        if df['Name'][x] == names[0]:
+        if df['id'][x] == player_ids[0]:
             a_values = df.iloc[x].values.tolist()
-        if df['Name'][x] == names[1]:
+        if df['id'][x] == player_ids[1]:
             b_values = df.iloc[x].values.tolist()
             
-    a_values = a_values[1:]
-    b_values = b_values[1:]
+    a_values = a_values[2:]
+    b_values = b_values[2:]
 
     values = [a_values,b_values]
     # Convert float strings to float values
@@ -99,7 +101,7 @@ def visualise(p1, p2):
         subtitle_fontsize=15
     )
 
-    endnote = 'Elon banished me :-('
+    endnote = 'Lets go golfin!'
 
     #instantiate radar chart class
     radar = Radar()
@@ -108,5 +110,5 @@ def visualise(p1, p2):
                             radar_color=['#B6282F', '#344D94'],
                             alphas=[.75,.6],title=title,endnote=endnote,
                             compare=True)
-    fig.savefig(f"{names[0]}vs{names[1]}.png", dpi=300, bbox_inches='tight')
+    fig.savefig("output.png", dpi=300, bbox_inches='tight')
     return True
